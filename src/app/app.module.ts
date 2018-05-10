@@ -28,9 +28,10 @@ import { ContactComponent } from './pages/contact/contact.component';
   imports: [
     RouterModule.forRoot(
       [
+        { path: '', component: HomeComponent },
         { path: 'contact', component: ContactComponent },
         { path: 'about', component: AboutComponent },
-        { path: '**', component: HomeComponent }
+        { path: '**', redirectTo: '', pathMatch: 'full' }
       ],
       { enableTracing: true }
     ),
