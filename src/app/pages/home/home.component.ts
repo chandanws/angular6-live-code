@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   title = '';
+  componentClasses = ['center'];
 
   pageData = [
     { name: 'ed', position: 'instructor' },
