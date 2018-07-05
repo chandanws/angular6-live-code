@@ -7,6 +7,8 @@ import { HttpClientModule }    from '@angular/common/http'; // for http
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ParentComponent } from './components/parent/parent.component';
+import { ChildComponent } from './components/child/child.component';
 
 // Services
 import { UsersService } from './services/users.service';
@@ -14,14 +16,16 @@ import { ContactService } from './services/contact.service';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
-import { AboutComponent } from './pages/about/about.component';
+import { CommunicationComponent } from './pages/communication/communication.component';
 import { ContactComponent } from './pages/contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AboutComponent,
+    ParentComponent,
+    ChildComponent,
+    CommunicationComponent,
     HomeComponent,
     ContactComponent
   ],
@@ -30,7 +34,7 @@ import { ContactComponent } from './pages/contact/contact.component';
       [
         { path: '', component: HomeComponent },
         { path: 'contact', component: ContactComponent },
-        { path: 'about', component: AboutComponent },
+        { path: 'communication', component: CommunicationComponent },
         { path: '**', redirectTo: '', pathMatch: 'full' }
       ],
       { enableTracing: true }
