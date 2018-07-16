@@ -12,12 +12,15 @@ import { ChildComponent } from './components/child/child.component';
 
 // Services
 import { UsersService } from './services/users.service';
-import { ContactService } from './services/contact.service';
+import { BackendService } from './services/backend.service';
+import { SessionService } from './services/session.service';
+import { AuthService } from './services/auth.service';
 
 // Pages
 import { HomeComponent } from './pages/home/home.component';
 import { CommunicationComponent } from './pages/communication/communication.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +30,14 @@ import { ContactComponent } from './pages/contact/contact.component';
     ChildComponent,
     CommunicationComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(
       [
         { path: '', component: HomeComponent },
+        { path: 'login', component: LoginComponent },
         { path: 'contact', component: ContactComponent },
         { path: 'communication', component: CommunicationComponent },
         { path: '**', redirectTo: '', pathMatch: 'full' }
@@ -45,7 +50,9 @@ import { ContactComponent } from './pages/contact/contact.component';
   ],
   providers: [
     UsersService,
-    ContactService
+    BackendService,
+    SessionService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
