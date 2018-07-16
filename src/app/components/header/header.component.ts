@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -9,9 +9,12 @@ import { SessionService } from '../../services/session.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   componentUsers = [];
   user: object;
+
+  private _isLoggedIn = false;
+  private _isLoggedInAsObservable;
 
   constructor(
     private router: Router,
@@ -23,8 +26,23 @@ export class HeaderComponent {
     this.user = this.session.getSession();
   }
 
+  ngOnInit() {
+    this._isLoggedInAsObservable = this.session.isLoggedInAsAObservable();
+    this._isLoggedInAsObservable.subscribe(
+      (loggedIn: boolean) => {
+        this._isLoggedIn = loggedIn;
+        console.log('onInit', loggedIn);
+      },
+      (error) => { console.log(error); }
+    );
+  }
+
   isLoggedIn() {
     return this.session.isLoggedIn();
+  }
+
+  isLoggedInAsObservable() {
+    return this._isLoggedIn;
   }
 
   login() {
@@ -33,5 +51,9 @@ export class HeaderComponent {
 
   logout() {
     return this.auth.logout();
+  }
+
+  ngOnDestroy() {
+    this._isLoggedInAsObservable.unsubscribe();
   }
 }
